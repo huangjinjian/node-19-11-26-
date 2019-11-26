@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>使用ajax获取node.js服务器数据</title>
+</head>
+
+<body>
+	<input type="button" value="获取数据" id="btn">
+	<div id="div"></div>
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		$(() => {
+			$("#btn").click(() => {
+				$.ajax({
+					url: "http://localhost:8181",
+					success: function (result) {
+						$("#div").html(result);
+					}
+				});
+			})
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>向服务端上传文件</title>
+</head>
+
+<body>
+	<h1>使用bodyparser中间件上传文件</h1>
+	<form action="" id="form1" enctype="multipart/form-data"></form>
+	请选择文件<input type="file" name="file" id="file">
+	<br>
+	<button type="submit" id="btn">上传</button>
+
+	<div>上传结果：<span></span></div>
+
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		$(() => {
+			let formData = new FormData()
+			$("#fileId").on("change", () => {
+				var file = document.querySelector('[type=file]');
+				console.log(file.files);
+				formData.append("file", file.files[0])
+			})
+			$("#btn").on("click", () => {
+				get()
+			})
+		})
+
+		function get(param) {
+			var formData = new FormData()
+			var files = document.getElementById("file").files
+			var file = files[0]
+			formData.append("myfile", file)
+			var xhr = new XMLHttpRequest()
+			xhr.open("POST", "index.html", true)
+			xhr.onload = (e) => {
+				if (this.status == 200) {
+					document.getElementById("result").innerHTML = this.response
+				}
+			}
+			xhr.send(formData)
+		}
+	</script>
+</body>
+
+</html>
